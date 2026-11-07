@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Join me on MOTIV</title>
+<meta name="description" content="Get better. Together. Join me on MOTIV.">
+<meta property="og:title" content="Join me on MOTIV">
+<meta property="og:description" content="Track what you do, grow, and push each other. Get better. Together.">
+<meta property="og:image" content="../motiv-wordmark.png">
+<meta name="theme-color" content="#0B0D10">
+<style>
+  :root { --bg:#0B0D10; --card:#15181D; --line:#252A31; --text:#FFFFFF; --muted:#9AA3AE; --blue:#89CFF0; --on:#0B0D10; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+  body { min-height: 100vh; display: flex; align-items: center; justify-content: center;
+         padding: max(24px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+         background: radial-gradient(600px 400px at 50% 0%, rgba(137,207,240,0.16), transparent 70%), var(--bg); }
+  main { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 20px; text-align: center; }
+  img.logo { width: 220px; max-width: 70%; margin: 0 auto; display: block; }
+  h1 { font-size: 28px; line-height: 1.15; margin: 0; letter-spacing: -0.5px; text-wrap: balance; }
+  h1 .user { color: var(--blue); }
+  p { margin: 0; color: var(--muted); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 12px; text-align: left; }
+  .step { display: flex; gap: 12px; align-items: flex-start; }
+  .n { flex: none; width: 26px; height: 26px; border-radius: 13px; background: rgba(137,207,240,0.15); color: var(--blue); font-weight: 800; font-size: 13px; display: grid; place-items: center; }
+  a.btn { display: block; text-decoration: none; text-align: center; font-weight: 800; font-size: 17px; padding: 15px; border-radius: 999px; }
+  a.primary { background: var(--blue); color: var(--on); }
+  a.secondary { background: transparent; color: var(--text); border: 1px solid var(--line); }
+  a:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  .slogan { font-weight: 900; letter-spacing: 3px; font-size: 12px; color: var(--blue); }
+  .small { font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="../motiv-wordmark.png" alt="MOTIV">
+  <h1 id="title">Join me on MOTIV</h1>
+  <p>Track what you do, watch yourself grow, and push each other.</p>
+
+  <a class="btn primary" id="open" href="motiv://">Open in MOTIV</a>
+  <a class="btn secondary" id="get" href="https://testflight.apple.com/join/htYZYMnb">Get MOTIV (free on TestFlight)</a>
+
+  <div class="card">
+    <div class="step"><span class="n">1</span><span>Don’t have MOTIV yet? Tap <b>Get MOTIV</b>, install Apple’s free TestFlight app, then tap <b>Install</b>.</span></div>
+    <div class="step"><span class="n">2</span><span>Create your account, then come back to this page and tap <b>Open in MOTIV</b>.</span></div>
+    <div class="step"><span class="n">3</span><span>Tap <b>Add friend</b> on my profile. That’s it.</span></div>
+  </div>
+  <p class="small">iPhone only for now.</p>
+  <div class="slogan">GET BETTER. TOGETHER.</div>
+</main>
+<script>
+  // ?u=username → open that profile in MOTIV (only letters, numbers, "_" and ".")
+  var u = (new URLSearchParams(location.search).get('u') || '').toLowerCase().replace(/[^a-z0-9_.]/g, '').slice(0, 20);
+  if (u.length >= 3) {
+    document.getElementById('open').href = 'motiv://add/' + u;
+    var t = document.getElementById('title');
+    t.textContent = '';
+    t.append('Join ');
+    var s = document.createElement('span'); s.className = 'user'; s.textContent = '@' + u; t.append(s);
+    t.append(' on MOTIV');
+    document.title = 'Join @' + u + ' on MOTIV';
+  }
+</script>
+</body>
+</html>
